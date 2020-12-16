@@ -1,8 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getComments, getPost } from "../data/request";
+import { Loading, Comments, Post } from "../style";
+import Comment from "./post/Comment";
 
 const Render = (props) => {
   const { id } = props.match.params;
-  return <div>{id}</div>;
+
+  const [post, setPost] = useState(false);
+  const [comments, setComments] = useState(false);
+
+  useEffect(() => {
+    getPost(id).then((response) => {
+      setPost(response);
+    });
+  }, [setPost, id]);
+
+  useEffect(() => {
+    getComments(id).then((response) => {
+      setComments(response);
+    });
+  }, [setComments, id]);
+  return (
+    <main>
+      <Post>
+        {!post && <Loading>Loading ...</Loading>}
+        <h1>{post.title}</h1>
+        <sup>{post.created_at}</sup>
+        <p>{post.content}</p>
+      </Post>
+
+      <Comments>
+        <h1>
+          {comments.length === 0 ? "No" : ""} Comment
+          {comments.length <= 1 ? "" : "s"}
+          {""}
+          {comments.length !== 0 ? ":" : "."}
+        </h1>
+        {!comments && <Loading>Loading ...</Loading>}
+        <ul></ul>
+        {comments &&
+          comments.map((comment) => (
+            <li key={comment.id}>
+              <Comment {...comment} />
+            </li>
+          ))}
+      </Comments>
+    </main>
+  );
 };
 
 export default Render;
