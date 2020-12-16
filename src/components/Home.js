@@ -14,19 +14,17 @@ const Render = () => {
 
   return (
     <Home>
-      <div>
-        <h1>Latest Posts</h1>
-        {!posts && <Loading>Loading ...</Loading>}
-        {posts && (
-          <ul>
-            {posts.map((el) => (
-              <li key={el.id}>
-                <Post {...el} />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <h1>Latest Posts</h1>
+      {!posts && <Loading>Loading ...</Loading>}
+      {posts && (
+        <ul>
+          {posts.map((el) => (
+            <li key={el.id}>
+              <Post {...el} />
+            </li>
+          ))}
+        </ul>
+      )}
     </Home>
   );
 };

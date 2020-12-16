@@ -42,9 +42,6 @@ export const Home = styled.main`
     list-style: none;
     margin-top: 20px;
   }
-
-  display: flex;
-  justify-content: center;
 `;
 
 export const ArticleList = styled.div`
@@ -64,3 +61,9 @@ export const Loading = styled.div``;
 export const Comments = styled.div``;
 
 export const Post = styled.div``;
+
+export const Center = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+`;
