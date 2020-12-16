@@ -1,4 +1,11 @@
 import axios from "axios";
+import { TOKEN } from "../config.json";
+
+const axiosInstanceConnect = axios.create({
+  baseURL: "https://supdevinci.nine1000.tech/",
+
+  headers: { "x-token": TOKEN },
+});
 
 const axiosInstance = axios.create({
   baseURL: "https://supdevinci.nine1000.tech/",
@@ -35,4 +42,15 @@ export const getComments = async (id) => {
       }))
     );
   });
+};
+
+export const addComment = async (idPost, comment) => {
+  return await axiosInstanceConnect
+    .post(`/posts/${idPost}/comments`, { content: comment })
+    .then(async (comment) => ({
+      id: comment.data.id,
+      author: await getUserName(comment.data.author),
+      content: comment.data.content,
+      created_at: comment.data.created_at,
+    }));
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getComments, getPost } from "../data/request";
 import { Loading, Comments, Post } from "../style";
 import Comment from "./post/Comment";
+import AddComment from "./post/AddComment";
 
 const Render = (props) => {
   const { id } = props.match.params;
@@ -45,6 +46,8 @@ const Render = (props) => {
             </li>
           ))}
       </Comments>
+
+      <AddComment id={post.id} setComments={setComments} />
     </main>
   );
 };

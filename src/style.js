@@ -67,3 +67,17 @@ export const Center = styled.div`
   justify-content: center;
   margin: 20px;
 `;
+
+export const AddComment = styled.form`
+  textarea {
+    min-width: 400px;
+    min-height: 150px;
+    width: 100%;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+
+  margin-top: 20px;
+`;
