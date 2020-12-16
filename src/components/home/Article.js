@@ -1,13 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ArticleList } from "../../style";
 
-export const Article = (prop) => {
+const render = (prop) => {
   return (
-    <>
-      <Link to={`/article/${prop.id}`}>
-        <h1>{prop.name}</h1>
-      </Link>
+    <ArticleList>
+      <h1>
+        <Link to={`/article/${prop.id}`}>{prop.name}</Link>
+      </h1>
       <sub>{prop.date.toString()}</sub>
-    </>
+    </ArticleList>
   );
 };
+
+export default render;

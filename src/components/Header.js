@@ -1,11 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-export const Header = () => {
+import { Header } from "../style";
+
+const render = () => {
   const link = [
-    {
-      name: "Sup de Vinci",
-      link: "/",
-    },
     {
       name: "About us",
       link: "/about",
@@ -21,8 +19,11 @@ export const Header = () => {
   ];
 
   return (
-    <header>
+    <Header>
       <nav>
+        <h1>
+          <Link to="/">Sup de Vinci</Link>
+        </h1>
         <ul>
           {link.map((el, index) => (
             <li key={index}>
@@ -31,6 +32,8 @@ export const Header = () => {
           ))}
         </ul>
       </nav>
-    </header>
+    </Header>
   );
 };
+
+export default render;

@@ -1,10 +1,14 @@
 import React from "react";
-export const Footer = () => {
+import { Footer } from "../style";
+
+const render = () => {
   return (
-    <footer>
+    <Footer>
       <p>
         <b>Sup de vinci</b> - All right reserved 2020
       </p>
-    </footer>
+    </Footer>
   );
 };
+
+export default render;
