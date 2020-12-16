@@ -1,5 +1,5 @@
 import React from "react";
-import Article from "./home/Article";
+import Article from "./home/Post";
 import { Home } from "../style";
 
 const render = () => {

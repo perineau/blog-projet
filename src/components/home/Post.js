@@ -6,7 +6,7 @@ const render = (props) => {
   return (
     <ArticleList>
       <h1>
-        <Link to={`/article/${props.id}`}>{props.name}</Link>
+        <Link to={`/post/${props.id}`}>{props.name}</Link>
       </h1>
       <sub>{props.date.toString()}</sub>
     </ArticleList>
