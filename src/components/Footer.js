@@ -1,7 +1,7 @@
 import React from "react";
 import { Footer } from "../style";
 
-const render = () => {
+const Render = () => {
   return (
     <Footer>
       <p>
@@ -11,4 +11,4 @@ const render = () => {
   );
 };
 
-export default render;
+export default Render;

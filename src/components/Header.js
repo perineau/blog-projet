@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Header } from "../style";
 
-const render = () => {
+const Render = () => {
   const link = [
     {
       name: "About us",
@@ -36,4 +36,4 @@ const render = () => {
   );
 };
 
-export default render;
+export default Render;

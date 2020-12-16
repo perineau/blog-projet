@@ -4,13 +4,13 @@ import { Home, Loading } from "../style";
 import { getPosts } from "../data/request";
 
 const Render = () => {
-  const [posts, setPost] = useState(false);
+  const [posts, setPosts] = useState(false);
 
   useEffect(() => {
     getPosts(0).then((response) => {
-      setPost(response);
+      setPosts(response);
     });
-  }, [setPost]);
+  }, [setPosts]);
 
   return (
     <Home>

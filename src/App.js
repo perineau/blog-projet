@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Article from "./components/Post";
 
-const render = () => {
+const Render = () => {
   return (
     <Router>
       <Header />
@@ -15,4 +15,4 @@ const render = () => {
   );
 };
 
-export default render;
+export default Render;

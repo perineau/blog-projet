@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ArticleList } from "../../style";
 
-const render = (props) => {
+const Render = (props) => {
   return (
     <ArticleList>
       <h1>
@@ -13,4 +13,4 @@ const render = (props) => {
   );
 };
 
-export default render;
+export default Render;
