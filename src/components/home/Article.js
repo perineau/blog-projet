@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ArticleList } from "../../style";
 
-const render = (prop) => {
+const render = (props) => {
   return (
     <ArticleList>
       <h1>
-        <Link to={`/article/${prop.id}`}>{prop.name}</Link>
+        <Link to={`/article/${props.id}`}>{props.name}</Link>
       </h1>
-      <sub>{prop.date.toString()}</sub>
+      <sub>{props.date.toString()}</sub>
     </ArticleList>
   );
 };
