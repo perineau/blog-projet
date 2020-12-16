@@ -5,6 +5,11 @@ FILESJS=$(git diff --cached --name-only --diff-filter=ACMR "*.js" "*.jsx" | sed 
 FILECODE=$(git diff --cached --name-only --diff-filter=ACMR "*.js" "*.html" "*.css" "*.jsx" | sed 's| |\\ |g')
 [ -z "$FILESJS" ] && exit 0
 
+# Prettify all selected FILESJS
+echo "$FILECODE" | xargs ./node_modules/.bin/prettier --write
+
+# Add back the modified/prettified FILESJS to staging
+echo "$FILECODE" | xargs git add
 
 PASS=true
 
@@ -18,7 +23,7 @@ fi
 
 for FILE in $FILESJS
 do
-  "$ESLINT" "$FILE"
+  "$ESLINT" "--max-warnings=0" "$FILE"
 
   if [[ "$?" == 0 ]]; then
     printf "\t\033[32mESLint Passed: $FILE\033[0m\n"
@@ -29,12 +34,6 @@ do
 done
 
 printf "\nJavascript validation completed!\n"
-
-# Prettify all selected FILESJS
-echo "$FILECODE" | xargs ./node_modules/.bin/prettier --write
-
-# Add back the modified/prettified FILESJS to staging
-echo "$FILECODE" | xargs git add
 
 if ! $PASS; then
   printf "\033[41mCOMMIT FAILED:\033[0m Your commit contains FILESJS that should pass ESLint but do not. Please fix the ESLint errors and try again.\n"
