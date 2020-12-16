@@ -1,8 +1,9 @@
 #!/bin/sh
 
 ESLINT="$(git rev-parse --show-toplevel)/node_modules/.bin/eslint"
-FILES=$(git diff --cached --name-only --diff-filter=ACMR "*.js" "*.jsx" | sed 's| |\\ |g')
-[ -z "$FILES" ] && exit 0
+FILESJS=$(git diff --cached --name-only --diff-filter=ACMR "*.js" "*.jsx" | sed 's| |\\ |g')
+FILECODE=$(git diff --cached --name-only --diff-filter=ACMR "*.js" "*.html" "*.css" "*.jsx" | sed 's| |\\ |g')
+[ -z "$FILESJS" ] && exit 0
 
 
 PASS=true
@@ -15,7 +16,7 @@ if [[ ! -x "$ESLINT" ]]; then
   exit 1
 fi
 
-for FILE in $FILES
+for FILE in $FILESJS
 do
   "$ESLINT" "$FILE"
 
@@ -30,16 +31,16 @@ done
 printf "\nJavascript validation completed!\n"
 
 if ! $PASS; then
-  printf "\033[41mCOMMIT FAILED:\033[0m Your commit contains files that should pass ESLint but do not. Please fix the ESLint errors and try again.\n"
+  printf "\033[41mCOMMIT FAILED:\033[0m Your commit contains FILESJS that should pass ESLint but do not. Please fix the ESLint errors and try again.\n"
   exit 1
 else
   printf "\033[42mCOMMIT SUCCEEDED\033[0m\n"
 fi
 
-# Prettify all selected files
-echo "$FILES" | xargs ./node_modules/.bin/prettier --write
+# Prettify all selected FILESJS
+echo "$FILECODE" | xargs ./node_modules/.bin/prettier --write
 
-# Add back the modified/prettified files to staging
-echo "$FILES" | xargs git add
+# Add back the modified/prettified FILESJS to staging
+echo "$FILECODE" | xargs git add
 
 exit 0
