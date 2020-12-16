@@ -58,3 +58,5 @@ export const ArticleList = styled.div`
     text-decoration: none;
   }
 `;
+
+export const Loading = styled.div``;

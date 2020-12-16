@@ -1,28 +1,34 @@
-import React from "react";
-import Article from "./home/Post";
-import { Home } from "../style";
+import React, { useState, useEffect } from "react";
+import Post from "./home/Post";
+import { Home, Loading } from "../style";
+import { getPosts } from "../data/request";
 
-const render = () => {
-  const article = [
-    { id: 1, name: "article 1", date: new Date(Date.now()) },
-    { id: 2, name: "article 2", date: new Date(Date.now()) },
-    { id: 3, name: "article 3", date: new Date(Date.now()) },
-  ];
+const Render = () => {
+  const [posts, setPost] = useState(false);
+
+  useEffect(() => {
+    getPosts(0).then((response) => {
+      setPost(response);
+    });
+  }, [setPost]);
 
   return (
     <Home>
       <div>
         <h1>Latest Posts</h1>
-        <ul>
-          {article.map((el) => (
-            <li key={el.id}>
-              <Article {...el} />
-            </li>
-          ))}
-        </ul>
+        {!posts && <Loading>Loading ...</Loading>}
+        {posts && (
+          <ul>
+            {posts.map((el) => (
+              <li key={el.id}>
+                <Post {...el} />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </Home>
   );
 };
 
-export default render;
+export default Render;
