@@ -2,8 +2,6 @@ import React from "react";
 import { Article } from "./home/Article";
 
 export const Home = () => {
-  //const dateFormater =
-
   const article = [
     { id: 1, name: "article 1", date: new Date(Date.now()) },
     { id: 2, name: "article 2", date: new Date(Date.now()) },
