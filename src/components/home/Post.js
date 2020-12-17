@@ -20,7 +20,7 @@ const Render = (props) => {
       <h1>
         <Link to={`/post/${props.id}`}>{props.title}</Link>
       </h1>
-      <sub>{props.created_at.toString()}</sub>
+      <sub>{props.date}</sub>
     </ArticleList>
   );
 };

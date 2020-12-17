@@ -24,7 +24,13 @@ export const getPosts = async (index = 0, number = 10) => {
         offset: index * number,
       },
     })
-    .then((posts) => posts.data);
+    .then((posts) => ({
+      count: posts.data.count,
+      result: posts.data.result.map((el) => ({
+        ...el,
+        date: el.updated_at ? el.updated_at : el.created_at,
+      })),
+    }));
 };
 
 export const getPost = async (id) => {
