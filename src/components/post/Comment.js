@@ -23,7 +23,7 @@ const Render = (props) => {
   return (
     <Comment>
       <h1>{props.author}</h1>
-      <sub>{props.date}</sub>
+      <sub>{props.created_at}</sub>
       <Markdown className="markdown">{props.content}</Markdown>
     </Comment>
   );

@@ -1,6 +1,11 @@
 import axios from "axios";
 import { TOKEN } from "../config.json";
 
+const getLatestDate = (el) => ({
+  ...el,
+  date: el.updated_at ? el.updated_at : el.created_at,
+});
+
 const axiosInstanceConnect = axios.create({
   baseURL: "https://supdevinci.nine1000.tech/",
   headers: { "x-token": TOKEN },
@@ -26,10 +31,7 @@ export const getPosts = async (index = 0, number = 10) => {
     })
     .then((posts) => ({
       count: posts.data.count,
-      result: posts.data.result.map((el) => ({
-        ...el,
-        date: el.updated_at ? el.updated_at : el.created_at,
-      })),
+      result: posts.data.result.map(getLatestDate),
     }));
 };
 
