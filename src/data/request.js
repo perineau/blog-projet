@@ -11,13 +11,13 @@ const axiosInstance = axios.create({
 });
 
 const getUserName = async (author) => {
-  return await axiosInstance
+  return axiosInstance
     .get(`/authors/${author}`)
     .then((author) => author.data.display_name);
 };
 
 export const getPosts = async (index = 0, number = 10) => {
-  return await axiosInstance
+  return axiosInstance
     .get("/posts", {
       params: {
         limit: number,
@@ -28,10 +28,10 @@ export const getPosts = async (index = 0, number = 10) => {
 };
 
 export const getPost = async (id) => {
-  return await axiosInstance.get(`/posts/${id}`).then((post) => post.data);
+  return axiosInstance.get(`/posts/${id}`).then((post) => post.data);
 };
 export const getComments = async (id, index = 0, number = 10) => {
-  return await axiosInstance
+  return axiosInstance
     .get(`/posts/${id}/comments`, {
       params: {
         limit: number,
@@ -54,7 +54,7 @@ export const getComments = async (id, index = 0, number = 10) => {
 };
 
 export const addComment = async (idPost, comment) => {
-  return await axiosInstanceConnect
+  return axiosInstanceConnect
     .post(`/posts/${idPost}/comments`, { content: comment })
     .then(async (comment) => ({
       id: comment.data.id,
