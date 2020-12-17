@@ -4,7 +4,13 @@ import Home from "./components/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Post from "./components/Post";
-import { Center } from "./style";
+import styled from "@emotion/styled/macro";
+
+const Center = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+`;
 
 const Render = () => {
   return (

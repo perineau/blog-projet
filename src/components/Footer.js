@@ -1,5 +1,18 @@
 import React from "react";
-import { Footer } from "../style";
+import styled from "@emotion/styled/macro";
+
+const Footer = styled.footer`
+  /* reset */
+  * {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  border-top: 1px black solid;
+`;
 
 const Render = () => {
   return (

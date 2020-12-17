@@ -1,6 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Header } from "../style";
+import styled from "@emotion/styled/macro";
+
+const Header = styled.header`
+  /* reset */
+  * {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  ul {
+    display: flex;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  li {
+    list-style: none;
+    margin: 0px 10px;
+  }
+
+  padding: 10px;
+  border-bottom: 2px black solid;
+`;
 
 const Render = () => {
   const link = [

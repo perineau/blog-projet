@@ -1,6 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArticleList } from "../../style";
+import styled from "@emotion/styled/macro";
+
+const ArticleList = styled.div`
+  h1 {
+  }
+  sub {
+    color: gray;
+  }
+
+  a {
+    text-decoration: none;
+  }
+`;
 
 const Render = (props) => {
   return (

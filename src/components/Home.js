@@ -1,8 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Post from "./home/Post";
-import { Home, Loading } from "../style";
+import Loading from "./Loading";
 import { getPosts } from "../data/request";
 import Pagination from "./Pagination";
+import styled from "@emotion/styled/macro";
+
+const Home = styled.main`
+  /* reset */
+  * {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  > ul > li {
+    list-style: none;
+    margin-top: 20px;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Render = () => {
   const [posts, setPosts] = useState(false);
@@ -20,7 +38,7 @@ const Render = () => {
   return (
     <Home>
       <h1>Latest Posts</h1>
-      {!posts && <Loading>Loading ...</Loading>}
+      {!posts && <Loading />}
       {posts && (
         <ul>
           {posts.map((el) => (

@@ -1,5 +1,33 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { Index } from "../style";
+import styled from "@emotion/styled/macro";
+
+export const Index = styled.div`
+  button {
+    padding: 0.5em 1em;
+    margin: 0;
+    background-color: #f1f0ee;
+  }
+
+  .active > button {
+    background-color: #3ed667;
+  }
+
+  ul {
+    display: flex;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  margin-top: 20px;
+  display: flex;
+`;
 
 const maxCase = 7;
 
@@ -68,7 +96,7 @@ const Render = (props) => {
     );
   }, [props.index, props.lenght, setCase]);
 
-  if (!props.lenght) {
+  if (props.lenght <= 0) {
     return "";
   }
 

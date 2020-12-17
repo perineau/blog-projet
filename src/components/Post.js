@@ -1,10 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { getComments, getPost } from "../data/request";
-import { Loading, Comments, Post, Markdown } from "../style";
+import Markdown from "./Markdown";
+import Loading from "./Loading";
 import Comment from "./post/Comment";
 import AddComment from "./post/AddComment";
-import ReactMarkdown from "react-markdown";
 import Pagination from "./Pagination";
+import styled from "@emotion/styled/macro";
+
+const Post = styled.div`
+  > h1 {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .markdown {
+    margin-top: 20px;
+  }
+`;
+
+const Comments = styled.div`
+  > ul {
+    margin: 0px;
+    padding: 0px;
+  }
+  > ul > li {
+    list-style: none;
+    margin-top: 20px;
+    background-color: #fff780;
+    padding: 20px;
+  }
+
+  > h1 {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  border-top: 1px black solid;
+  padding: 20px 0px;
+  margin-top: 20px;
+`;
 
 const Render = (props) => {
   const { id } = props.match.params;
@@ -32,12 +66,10 @@ const Render = (props) => {
   return (
     <main>
       <Post>
-        {!post && <Loading>Loading ...</Loading>}
+        {!post && <Loading />}
         <h1>{post.title}</h1>
         <sup>{post.created_at}</sup>
-        <Markdown>
-          <ReactMarkdown children={post.content} />
-        </Markdown>
+        <Markdown className="markdown">{post.content}</Markdown>
       </Post>
 
       <Comments>
@@ -47,7 +79,7 @@ const Render = (props) => {
           {""}
           {count !== 0 ? ":" : "."}
         </h1>
-        {!comments && <Loading>Loading ...</Loading>}
+        {!comments && <Loading />}
         <ul>
           {comments &&
             comments.map((comment) => (
