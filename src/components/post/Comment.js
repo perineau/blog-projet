@@ -1,11 +1,15 @@
 import React from "react";
+import { Markdown } from "../../style";
+import ReactMarkdown from "react-markdown";
 
 const Render = (props) => {
   return (
     <div>
       <h1>{props.author}</h1>
       <sub>{props.created_at}</sub>
-      <p>{props.content}</p>
+      <Markdown>
+        <ReactMarkdown>{props.content}</ReactMarkdown>
+      </Markdown>
     </div>
   );
 };

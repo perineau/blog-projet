@@ -1,6 +1,12 @@
 import styled from "@emotion/styled";
 
 export const Header = styled.header`
+  // reset
+  * {
+    padding: 0px;
+    margin: 0px;
+  }
+
   nav {
     display: flex;
     justify-content: space-between;
@@ -25,6 +31,12 @@ export const Header = styled.header`
 `;
 
 export const Footer = styled.footer`
+  // reset
+  * {
+    padding: 0px;
+    margin: 0px;
+  }
+
   display: flex;
   justify-content: center;
   padding: 10px;
@@ -81,3 +93,5 @@ export const AddComment = styled.form`
 
   margin-top: 20px;
 `;
+
+export const Markdown = styled.div``;
