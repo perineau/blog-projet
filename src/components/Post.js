@@ -29,7 +29,7 @@ const Render = (props) => {
         <h1>{post.title}</h1>
         <sup>{post.created_at}</sup>
         <Markdown>
-          <ReactMarkdown>{post.content}</ReactMarkdown>
+          <ReactMarkdown children={post.content} />
         </Markdown>
       </Post>
 
