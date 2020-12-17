@@ -4,12 +4,16 @@ import { Loading, Comments, Post, Markdown } from "../style";
 import Comment from "./post/Comment";
 import AddComment from "./post/AddComment";
 import ReactMarkdown from "react-markdown";
+import Pagination from "./Pagination";
 
 const Render = (props) => {
   const { id } = props.match.params;
 
   const [post, setPost] = useState(false);
   const [comments, setComments] = useState(false);
+  const [count, setCount] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [max, setMax] = useState(0);
 
   useEffect(() => {
     getPost(id).then((response) => {
@@ -18,10 +22,13 @@ const Render = (props) => {
   }, [setPost, id]);
 
   useEffect(() => {
-    getComments(id).then((response) => {
-      setComments(response);
+    const number = 10;
+    getComments(id, index, number).then((response) => {
+      setComments(response.result);
+      setCount(response.count);
+      setMax(Math.ceil(response.count / number) - 1);
     });
-  }, [setComments, id]);
+  }, [setComments, id, setCount, index, setMax]);
   return (
     <main>
       <Post>
@@ -35,10 +42,10 @@ const Render = (props) => {
 
       <Comments>
         <h1>
-          {comments.length === 0 ? "No" : comments.length} Comment
-          {comments.length <= 1 ? "" : "s"}
+          {count === 0 ? "No" : count} Comment
+          {count <= 1 ? "" : "s"}
           {""}
-          {comments.length !== 0 ? ":" : "."}
+          {count !== 0 ? ":" : "."}
         </h1>
         {!comments && <Loading>Loading ...</Loading>}
         <ul>
@@ -51,7 +58,9 @@ const Render = (props) => {
         </ul>
       </Comments>
 
-      <AddComment id={post.id} setComments={setComments} />
+      <Pagination index={index} setIndex={setIndex} lenght={max} />
+
+      <AddComment id={post.id} setComments={setComments} setIndex={setIndex} />
     </main>
   );
 };

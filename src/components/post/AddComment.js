@@ -5,11 +5,22 @@ import { AddComment } from "../../style";
 const Render = (props) => {
   const handlerSubmit = useCallback(
     (event) => {
-      event.preventDefault();
       addComment(props.id, event.target.comment.value).then((result) => {
-        props.setComments((comments) => [result, ...comments]);
+        props.setIndex((index) => {
+          if (index !== 0) {
+            return 0;
+          }
+          console.log(index);
+          props.setComments((comments) => {
+            console.log([result, ...comments.slice(0, -1)]);
+            return [result, ...comments.slice(0, -1)];
+          });
+
+          return 0;
+        });
       });
       event.target.comment.value = "";
+      event.preventDefault();
     },
     [props]
   );

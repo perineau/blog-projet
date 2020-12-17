@@ -3,7 +3,6 @@ import { TOKEN } from "../config.json";
 
 const axiosInstanceConnect = axios.create({
   baseURL: "https://supdevinci.nine1000.tech/",
-
   headers: { "x-token": TOKEN },
 });
 
@@ -25,23 +24,33 @@ export const getPosts = async (index = 0, number = 10) => {
         offset: index * number,
       },
     })
-    .then((posts) => posts.data.result);
+    .then((posts) => posts.data);
 };
 
 export const getPost = async (id) => {
   return await axiosInstance.get(`/posts/${id}`).then((post) => post.data);
 };
-export const getComments = async (id) => {
-  return await axiosInstance.get(`/posts/${id}/comments`).then((comments) => {
-    return Promise.all(
-      comments.data.result.map(async (comment) => ({
-        id: comment.id,
-        author: await getUserName(comment.author),
-        content: comment.content,
-        created_at: comment.created_at,
-      }))
-    );
-  });
+export const getComments = async (id, index = 0, number = 10) => {
+  return await axiosInstance
+    .get(`/posts/${id}/comments`, {
+      params: {
+        limit: number,
+        offset: index * number,
+      },
+    })
+    .then(async (comments) => {
+      return {
+        result: await Promise.all(
+          comments.data.result.map(async (comment) => ({
+            id: comment.id,
+            author: await getUserName(comment.author),
+            content: comment.content,
+            created_at: comment.created_at,
+          }))
+        ),
+        count: comments.data.count,
+      };
+    });
 };
 
 export const addComment = async (idPost, comment) => {

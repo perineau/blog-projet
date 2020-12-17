@@ -50,16 +50,14 @@ export const Home = styled.main`
     margin: 0px;
   }
 
-  > div {
-    display: flex;
-    flex-direction: column;
-    margin: 20px 0px;
-  }
-
-  li {
+  > ul > li {
     list-style: none;
     margin-top: 20px;
   }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const ArticleList = styled.div`
@@ -148,4 +146,32 @@ export const AddComment = styled.form`
   }
   display: flex;
   flex-direction: column;
+`;
+
+export const Index = styled.div`
+  button {
+    padding: 0.5em 1em;
+    margin: 0;
+    background-color: #f1f0ee;
+  }
+
+  .active > button {
+    background-color: #3ed667;
+  }
+
+  ul {
+    display: flex;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  margin-top: 20px;
+  display: flex;
 `;
