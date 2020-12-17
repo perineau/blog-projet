@@ -35,7 +35,7 @@ const Render = (props) => {
 
       <Comments>
         <h1>
-          {comments.length === 0 ? "No" : ""} Comment
+          {comments.length === 0 ? "No" : comments.length} Comment
           {comments.length <= 1 ? "" : "s"}
           {""}
           {comments.length !== 0 ? ":" : "."}
