@@ -6,18 +6,20 @@ const Render = (props) => {
   const handlerSubmit = useCallback(
     (event) => {
       addComment(props.id, event.target.comment.value).then((result) => {
+        let change = false;
         props.setIndex((index) => {
           if (index !== 0) {
             return 0;
           }
-          console.log(index);
-          props.setComments((comments) => {
-            console.log([result, ...comments.slice(0, -1)]);
-            return [result, ...comments.slice(0, -1)];
-          });
+          change = true;
 
           return 0;
         });
+        if (change) {
+          props.setComments((comments) => {
+            return [result, ...comments.slice(0, -1)];
+          });
+        }
       });
       event.target.comment.value = "";
       event.preventDefault();
