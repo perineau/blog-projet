@@ -19,28 +19,16 @@ const AddComment = styled.form`
 `;
 
 const Render = (props) => {
+  const { dispatch } = props;
   const handlerSubmit = useCallback(
     (event) => {
       addComment(props.id, event.target.comment.value).then((result) => {
-        let change = false;
-        props.setIndex((index) => {
-          if (index !== 0) {
-            return 0;
-          }
-          change = true;
-
-          return 0;
-        });
-        if (change) {
-          props.setComments((comments) => {
-            return [result, ...comments.slice(0, -1)];
-          });
-        }
+        dispatch({ type: "addComment", comment: result });
       });
       event.target.comment.value = "";
       event.preventDefault();
     },
-    [props]
+    [dispatch, props.id]
   );
   return (
     <AddComment onSubmit={handlerSubmit}>

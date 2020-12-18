@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useReducer } from "react";
 import { getComments, getPost } from "../data/request";
 import Markdown from "./Markdown";
 import Loading from "./Loading";
@@ -6,6 +6,8 @@ import Comment from "./post/Comment";
 import AddComment from "./post/AddComment";
 import Pagination from "./Pagination";
 import styled from "@emotion/styled/macro";
+
+const number = 10;
 
 const Post = styled.div`
   > h1 {
@@ -40,49 +42,83 @@ const Comments = styled.div`
   margin-top: 20px;
 `;
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "setIndex":
+      return { ...state, index: action.index };
+    case "setPost":
+      return { ...state, post: action.post };
+    case "setComments":
+      return { ...state, comments: action.comments };
+    case "setCount":
+      return {
+        ...state,
+        count: action.count,
+        max: Math.ceil(action.count / number) - 1,
+      };
+    case "addComment":
+      return {
+        ...state,
+        comments: [action.comment, ...state.comments.slice(0, -1)],
+        count: state.count + 1,
+        max: Math.ceil((state.count + 1) / number) - 1,
+      };
+
+    default:
+      return state;
+  }
+};
+
 const Render = (props) => {
   const { id } = props.match.params;
 
-  const [post, setPost] = useState(false);
-  const [comments, setComments] = useState(false);
-  const [count, setCount] = useState(0);
-  const [index, setIndex] = useState(0);
-  const [max, setMax] = useState(0);
+  const [state, dispatch] = useReducer(reducer, {
+    post: false,
+    comments: false,
+    count: 0,
+    index: 0,
+    max: 0,
+  });
+
+  const handleSetIndex = useCallback(
+    (index) => {
+      dispatch({ type: "setIndex", index: index });
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     getPost(id).then((response) => {
-      setPost(response);
+      dispatch({ type: "setPost", post: response });
     });
-  }, [setPost, id]);
+  }, [dispatch, id]);
 
   useEffect(() => {
-    const number = 10;
-    getComments(id, index, number).then((response) => {
-      setComments(response.result);
-      setCount(response.count);
-      setMax(Math.ceil(response.count / number) - 1);
+    getComments(id, state.index, number).then((response) => {
+      dispatch({ type: "setComments", comments: response.result });
+      dispatch({ type: "setCount", count: response.count });
     });
-  }, [setComments, id, setCount, index, setMax]);
+  }, [dispatch, id, state.index]);
   return (
     <main>
       <Post>
-        {!post && <Loading />}
-        <h1>{post.title}</h1>
-        <sup>{post.created_at}</sup>
-        <Markdown className="markdown">{post.content}</Markdown>
+        {!state.post && <Loading />}
+        <h1>{state.post.title}</h1>
+        <sup>{state.post.created_at}</sup>
+        <Markdown className="markdown">{state.post.content}</Markdown>
       </Post>
 
       <Comments>
         <h1>
-          {count === 0 ? "No" : count} Comment
-          {count <= 1 ? "" : "s"}
+          {state.count === 0 ? "No" : state.count} Comment
+          {state.count <= 1 ? "" : "s"}
           {""}
-          {count !== 0 ? ":" : "."}
+          {state.count !== 0 ? ":" : "."}
         </h1>
-        {!comments && <Loading />}
+        {!state.comments && <Loading />}
         <ul>
-          {comments &&
-            comments.map((comment) => (
+          {state.comments &&
+            state.comments.map((comment) => (
               <li key={comment.id}>
                 <Comment {...comment} />
               </li>
@@ -90,9 +126,13 @@ const Render = (props) => {
         </ul>
       </Comments>
 
-      <Pagination index={index} setIndex={setIndex} lenght={max} />
+      <Pagination
+        index={state.index}
+        setIndex={handleSetIndex}
+        lenght={state.max}
+      />
 
-      <AddComment id={post.id} setComments={setComments} setIndex={setIndex} />
+      <AddComment state={state} dispatch={dispatch} id={id} />
     </main>
   );
 };
