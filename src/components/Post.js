@@ -81,10 +81,10 @@ const Render = (props) => {
   });
 
   const handleSetIndex = useCallback(
-    (index) => {
-      dispatch({ type: "setIndex", index: index });
+    (newIndex) => {
+      dispatch({ type: "setIndex", index: newIndex(state.index) });
     },
-    [dispatch]
+    [dispatch, state.index]
   );
 
   useEffect(() => {
