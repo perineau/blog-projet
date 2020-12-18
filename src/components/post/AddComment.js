@@ -16,6 +16,7 @@ const AddComment = styled.form`
   }
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 `;
 
 const Render = (props) => {

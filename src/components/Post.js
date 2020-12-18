@@ -38,8 +38,8 @@ const Comments = styled.div`
   }
 
   border-top: 1px black solid;
-  padding: 20px 0px;
-  margin-top: 20px;
+  padding-top: 20px;
+  margin-top: 20px 0px;
 `;
 
 const reducer = (state, action) => {
