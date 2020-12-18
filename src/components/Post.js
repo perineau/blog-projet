@@ -6,6 +6,7 @@ import Comment from "./post/Comment";
 import AddComment from "./post/AddComment";
 import Pagination from "./Pagination";
 import styled from "@emotion/styled/macro";
+import { useParams } from "react-router-dom";
 
 const number = 10;
 
@@ -69,8 +70,8 @@ const reducer = (state, action) => {
   }
 };
 
-const Render = (props) => {
-  const { id } = props.match.params;
+const Render = () => {
+  const { id } = useParams();
 
   const [state, dispatch] = useReducer(reducer, {
     post: false,
