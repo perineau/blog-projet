@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled/macro";
+import { format } from "date-fns";
 
 const ArticleList = styled.div`
   h1 {
@@ -20,7 +21,7 @@ const Render = (props) => {
       <h1>
         <Link to={`/post/${props.id}`}>{props.title}</Link>
       </h1>
-      <sub>{props.date}</sub>
+      <sub>{format(new Date(props.date), "MMMM do',' u 'at' ppp")}</sub>
     </ArticleList>
   );
 };

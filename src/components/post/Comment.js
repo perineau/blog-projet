@@ -1,6 +1,7 @@
 import React from "react";
 import Markdown from "../Markdown";
 import styled from "@emotion/styled/macro";
+import { format } from "date-fns";
 
 const Comment = styled.div`
   > h1 {
@@ -23,7 +24,7 @@ const Render = (props) => {
   return (
     <Comment>
       <h1>{props.author}</h1>
-      <sub>{props.created_at}</sub>
+      <sub>{format(new Date(props.created_at), "MMMM do',' u 'at' ppp")}</sub>
       <Markdown className="markdown">{props.content}</Markdown>
     </Comment>
   );
