@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect, useReducer } from "react";
-import { getComments, getPost } from "../data/request";
-import Markdown from "./Markdown";
-import Loading from "./Loading";
-import Comment from "./post/Comment";
-import AddComment from "./post/AddComment";
-import Pagination from "./Pagination";
 import styled from "@emotion/styled/macro";
+import React, { useCallback, useEffect, useReducer } from "react";
 import { useParams } from "react-router-dom";
+
+import { getComments, getPost } from "../data/request";
+import Loading from "./Loading";
+import Markdown from "./Markdown";
+import Pagination from "./Pagination";
+import AddComment from "./post/AddComment";
+import Comment from "./post/Comment";
 
 const number = 10;
 

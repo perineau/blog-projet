@@ -1,6 +1,6 @@
+import styled from "@emotion/styled/macro";
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "@emotion/styled/macro";
 
 const Header = styled.header`
   /* reset */

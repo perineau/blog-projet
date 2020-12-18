@@ -1,13 +1,14 @@
+import styled from "@emotion/styled/macro";
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Home from "./components/Home";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Post from "./components/Post";
+
 import About from "./components/About";
 import Authors from "./components/Authors";
 import Contact from "./components/Contact";
-import styled from "@emotion/styled/macro";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Home from "./components/Home";
+import Post from "./components/Post";
 
 const Center = styled.div`
   display: flex;

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Post from "./home/Post";
-import Loading from "./Loading";
-import { getPosts } from "../data/request";
-import Pagination from "./Pagination";
 import styled from "@emotion/styled/macro";
+import React, { useState, useEffect } from "react";
+
+import { getPosts } from "../data/request";
+import Loading from "./Loading";
+import Pagination from "./Pagination";
+import Post from "./home/Post";
 
 const Home = styled.main`
   /* reset */

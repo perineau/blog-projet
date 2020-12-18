@@ -1,0 +1,21 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parser": "babel-eslint",
+  "plugins": ["react"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "react/no-children-prop": "off",
+    "no-inline-comments": "warn",
+    "no-console": "warn"
+  }
+}

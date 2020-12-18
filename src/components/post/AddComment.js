@@ -1,6 +1,7 @@
-import React, { useCallback } from "react";
-import { addComment } from "../../data/request";
 import styled from "@emotion/styled/macro";
+import React, { useCallback } from "react";
+
+import { addComment } from "../../data/request";
 
 const AddComment = styled.form`
   textarea {

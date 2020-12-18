@@ -1,7 +1,8 @@
-import React from "react";
-import Markdown from "../Markdown";
 import styled from "@emotion/styled/macro";
 import { format } from "date-fns";
+import React from "react";
+
+import Markdown from "../Markdown";
 
 const Comment = styled.div`
   > h1 {

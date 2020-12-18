@@ -1,5 +1,5 @@
-import React from "react";
 import styled from "@emotion/styled/macro";
+import React from "react";
 
 const Footer = styled.footer`
   /* reset */
